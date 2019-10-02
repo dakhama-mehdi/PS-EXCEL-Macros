@@ -8,12 +8,11 @@
     Get-ChildItem $chemin -Recurse | where {$_.extension -like "*.xls*" } | ForEach-Object -Begin {
     $thisThread = [System.Threading.Thread]::CurrentThread
     $originalCulture = $thisThread.CurrentCulture
-    #$thisThread.CurrentCulture = New-Object System.Globalization.CultureInfo('fr-FR')
-
-    #demarrer Excel
+    
+    #demarrer Excel / Open Excel
     $excel = new-object -comobject excel.application
     
-    #Ignorer les messages de demandes à l'utilisateur 
+    #Ignorer les messages de demandes à l'utilisateur  / Skip message
     $excel.DisplayAlerts = $false
     #$excel.ScreenUpdating = $false
     $excel.Visible = $false
@@ -21,20 +20,20 @@
     $excel.UserControl = $false
        
 } -Process {   
-    # Ouvrir le fichier Excel
+    # Ouvrir le fichier Excel / open excel files
     
     $workbook = $excel.workbooks.Open($_.FullName,$false,$true) 
     Write-Host on traite le : $_.Name 
 
 
-    # Verifier la presence de macros
+    # Verifier la presence de macros / check contains macros
     if ($workbook.HasVBProject -notlike "false") {
     
     if ($workbook.HasVBProject -like "true") {
     $Macros = "present"
      } else  {
 
-     #$Macros = "Fichiers pas verifier"
+     #$Macros = "Fichiers pas verifier /files not check" 
 
      } 
 
@@ -46,12 +45,12 @@
     }
     
        
-    #Fermeture du fichier Excel
+    #Fermeture du fichier Excel / close file Excel
     $workbook.Close()
     
 
 } -end {
-    #Fermer le processus Excel
+    #Fermer le processus Excel /close process
     $excel.Quit()
     $thisThread.CurrentCulture = $originalCulture
     
