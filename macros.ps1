@@ -1,5 +1,5 @@
 
- function testmacros {
+ function checkmacros {
 
     $store = $null
     $Macros = $null
@@ -63,4 +63,4 @@
         
   }
 
-  testmacros -verbose
+ checkmacros -verbose
