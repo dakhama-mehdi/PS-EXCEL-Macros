@@ -1,3 +1,3 @@
 # PS-EXCEL-Macros
-Finding excel contains macros
+Finding excel files contains macros
 Trouver les fichiers Excel avec des macros
